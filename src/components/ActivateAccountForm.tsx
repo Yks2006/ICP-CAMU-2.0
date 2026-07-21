@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { PasswordInput } from "@/components/PasswordInput";
 import { PasswordRequirementsHint } from "@/components/PasswordRequirementsHint";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -108,24 +109,16 @@ export function ActivateAccountForm() {
           </Label>
           <PasswordRequirementsHint password={password} />
         </div>
-        <div className="relative">
-          <MaterialIcon
-            icon="lock"
-            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-outline"
-          />
-          <Input
-            id="password"
-            type="password"
-            autoComplete="new-password"
-            placeholder="Create your password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            onBlur={() => setPasswordError(validatePassword(password))}
-            aria-invalid={Boolean(passwordError)}
-            maxLength={12}
-            className="h-11 border-outline-variant bg-surface-container-low pl-10 text-body-md focus-visible:border-primary focus-visible:ring-primary/20"
-          />
-        </div>
+        <PasswordInput
+          id="password"
+          autoComplete="new-password"
+          placeholder="Create your password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          onBlur={() => setPasswordError(validatePassword(password))}
+          aria-invalid={Boolean(passwordError)}
+          maxLength={12}
+        />
         {passwordError && (
           <p className="text-label-sm text-error" role="alert">
             {passwordError}
@@ -137,32 +130,24 @@ export function ActivateAccountForm() {
         <Label htmlFor="confirmPassword" className="text-label-md font-label-md text-on-surface">
           Confirm Password
         </Label>
-        <div className="relative">
-          <MaterialIcon
-            icon="lock"
-            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-outline"
-          />
-          <Input
-            id="confirmPassword"
-            type="password"
-            autoComplete="new-password"
-            placeholder="Re-enter your password"
-            value={confirmPassword}
-            onChange={(event) => setConfirmPassword(event.target.value)}
-            onBlur={() =>
-              setConfirmPasswordError(
-                !confirmPassword
-                  ? "Please confirm your password."
-                  : password !== confirmPassword
-                    ? "Passwords do not match."
-                    : undefined,
-              )
-            }
-            aria-invalid={Boolean(confirmPasswordError)}
-            maxLength={12}
-            className="h-11 border-outline-variant bg-surface-container-low pl-10 text-body-md focus-visible:border-primary focus-visible:ring-primary/20"
-          />
-        </div>
+        <PasswordInput
+          id="confirmPassword"
+          autoComplete="new-password"
+          placeholder="Re-enter your password"
+          value={confirmPassword}
+          onChange={(event) => setConfirmPassword(event.target.value)}
+          onBlur={() =>
+            setConfirmPasswordError(
+              !confirmPassword
+                ? "Please confirm your password."
+                : password !== confirmPassword
+                  ? "Passwords do not match."
+                  : undefined,
+            )
+          }
+          aria-invalid={Boolean(confirmPasswordError)}
+          maxLength={12}
+        />
         {confirmPasswordError && (
           <p className="text-label-sm text-error" role="alert">
             {confirmPasswordError}

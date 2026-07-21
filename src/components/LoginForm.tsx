@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { PasswordInput } from "@/components/PasswordInput";
 import { PasswordRequirementsHint } from "@/components/PasswordRequirementsHint";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -146,24 +147,16 @@ export function LoginForm() {
           <PasswordRequirementsHint password={password} />
         </div>
 
-        <div className="relative">
-          <MaterialIcon
-            icon="lock"
-            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-outline"
-          />
-          <Input
-            id="password"
-            type="password"
-            autoComplete="current-password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            onBlur={handlePasswordBlur}
-            aria-invalid={Boolean(passwordError)}
-            maxLength={12}
-            className="h-11 border-outline-variant bg-surface-container-low pl-10 text-body-md focus-visible:border-primary focus-visible:ring-primary/20"
-          />
-        </div>
+        <PasswordInput
+          id="password"
+          autoComplete="current-password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          onBlur={handlePasswordBlur}
+          aria-invalid={Boolean(passwordError)}
+          maxLength={12}
+        />
 
         {passwordError && (
           <p className="text-label-sm text-error" role="alert">
